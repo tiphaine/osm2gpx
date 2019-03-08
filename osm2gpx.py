@@ -55,9 +55,6 @@ def _write_gpx_trace(output_file, content, output_dir='gpx_traces'):
     """
     with open('{}/{}'.format(output_dir, output_file), 'w') as of:
         splits = str(content).split('\\n')
-        len_splits = len(splits)
-        for split in splits:
-            print(split, len(split))
         for index, item in enumerate(splits):
             if index == 0:
                 of.write(str(item)[2:] + '\n')
