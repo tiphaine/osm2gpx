@@ -62,9 +62,9 @@ def _write_gpx_trace(output_file, content, output_dir='gpx_traces'):
 
 
 @click.command()
-@click.option('--nb_traces', default=2, prompt='', help='Number of gpx traces.')
+@click.option('--nb_traces', default=2, prompt='Number of traces ?', help='Number of gpx traces.')
 @click.option('--city_name', default='lyon',
-              prompt='City Name? [{}]'.format(', '.join(bounding_boxes.keys())),
+              prompt='City Name? ({})'.format(', '.join(bounding_boxes.keys())),
               help='City name / examples: [{}].'.format(', '.join(bounding_boxes.keys())))
 @click.option('--output_dir', default='gpx_traces',
             help='Directory for downloaded traces.')
