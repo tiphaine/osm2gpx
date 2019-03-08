@@ -54,11 +54,16 @@ def _write_gpx_trace(output_file, content, output_dir='gpx_traces'):
         None
     """
     with open('{}/{}'.format(output_dir, output_file), 'w') as of:
-        for index, item in enumerate(str(content).split('\\n')):
+        splits = str(content).split('\\n')
+        len_splits = len(splits)
+        for split in splits:
+            print(split, len(split))
+        for index, item in enumerate(splits):
             if index == 0:
                 of.write(str(item)[2:] + '\n')
             else:
-                of.write(item + '\n')
+                if len(item) > 1:
+                    of.write(str(item) + '\n')
 
 
 @click.command()
@@ -77,7 +82,7 @@ def collect_traces(nb_traces, city_name, output_dir='gpx_traces'):
         r = requests.get(request_to_send)
         output_file_name = 'trace_{}_{}.gpx'.format(
             city_name, uuid.uuid1(), output_dir)
-        _write_gpx_trace(output_file_name, r.content)
+        _write_gpx_trace(output_file_name, r.content, output_dir)
 
 
 if __name__ == '__main__':

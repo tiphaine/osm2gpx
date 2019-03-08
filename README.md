@@ -28,7 +28,9 @@ We can find traces in the `gpx_traces` directory by default. Traces naming follo
 
 	{output_dir}/trace_{city_name}_{uuid}.gpx
 		
-where `uuid` is based on the host ID and current time.
+where `uuid` is based on the host ID and current time. 
+
+We use uuid to avoid overwriting previous traces.
   	  
 Note: as of now, bounding box coordinates are hardcoded in the script. An evolution could take them as coordinates :)
 
