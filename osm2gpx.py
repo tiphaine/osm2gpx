@@ -62,9 +62,12 @@ def _write_gpx_trace(output_file, content, output_dir='gpx_traces'):
 
 
 @click.command()
-@click.option('--nb_traces', default=2, help='Number of gpx traces.')
-@click.option('--city_name', default='lyon', prompt='City Name',
-              help='Examples: [{}]'.format(', '.join(bounding_boxes.keys())))
+@click.option('--nb_traces', default=2, prompt='', help='Number of gpx traces.')
+@click.option('--city_name', default='lyon',
+              prompt='City Name? [{}]'.format(', '.join(bounding_boxes.keys())),
+              help='City name / examples: [{}].'.format(', '.join(bounding_boxes.keys())))
+@click.option('--output_dir', default='gpx_traces',
+            help='Directory for downloaded traces.')
 def collect_traces(nb_traces, city_name, output_dir='gpx_traces'):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)

@@ -4,24 +4,33 @@ _Script to collect public GPS data from the [OSM API (0.6)](https://wiki.openstr
 
 ## Requirements 
 
-- Python 3.6
-- Click
-- requests
-- tqdm
+- `Python 3.7`
+- `Click`
+- `requests`
+- `tqdm`
 
 		$ pip install -r requirements.txt
 	
 ## Usage
 
-	 
-	Usage: osm2gpx.py [OPTIONS]
-	
-	Options:
-	  --nb_traces INTEGER  Number of gpx traces (default: 10).
-	  --city_name TEXT     Examples: [ile-de-france, paris, lyon, bourg-saint-maurice]
-  	  --help               Show this message and exit.
+```	 
+Usage: osm2gpx.py [OPTIONS]
+
+Options:
+  --nb_traces INTEGER  Number of gpx traces.
+  --city_name TEXT     City name / examples: [ile-de-france, paris, lyon,
+                       bourg-saint-maurice].
+  --output_dir TEXT    Directory for downloaded traces.
+  --help               Show this message and exit.
+```
+ 	  
+We can find traces in the `gpx_traces` directory by default. Traces naming follows this pattern:
+
+	{output_dir}/trace_{city_name}_{uuid}.gpx
+		
+where `uuid` is based on the host ID and current time.
   	  
- As of now, bounding box coordinates are hardcoded in the script. An evolution could take them as coordinates :)
+Note: as of now, bounding box coordinates are hardcoded in the script. An evolution could take them as coordinates :)
 
 ### Example
 
