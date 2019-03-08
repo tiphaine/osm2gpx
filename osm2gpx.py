@@ -35,7 +35,7 @@ def _format_request(bbox_tuple, nb_traces=10):
     top = bbox_tuple[1]
     right = bbox_tuple[2]
     bottom = bbox_tuple[3]
-    for pageNumber in range(int(nb_traces) + 1):
+    for pageNumber in range(int(nb_traces)):
         request_list.append("{api_path}/api/0.6/trackpoints?bbox={left},{bottom},{right},{top}&page={pageNumber}".format(
             left=left, right=right, bottom=bottom, top=top,
             pageNumber=pageNumber, api_path=osm_api_path))
