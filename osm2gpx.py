@@ -15,7 +15,7 @@ bounding_boxes = {
 }
 
 
-def _format_request(bbox_tuple, nb_traces=10):
+def _format_request(bbox_tuple, offset=0, nb_traces=10):
     """Format OSM API v0.6 queries to get public GPS traces in a given area.
 
     The bbox_tuple determines the bounding box area (cf. OSM documentation
@@ -35,7 +35,7 @@ def _format_request(bbox_tuple, nb_traces=10):
     top = bbox_tuple[1]
     right = bbox_tuple[2]
     bottom = bbox_tuple[3]
-    for pageNumber in range(int(nb_traces)):
+    for pageNumber in range(offset, offset + int(nb_traces)):
         request_list.append("{api_path}/api/0.6/trackpoints?bbox={left},{bottom},{right},{top}&page={pageNumber}".format(
             left=left, right=right, bottom=bottom, top=top,
             pageNumber=pageNumber, api_path=osm_api_path))
@@ -70,11 +70,12 @@ def _write_gpx_trace(output_file, content, output_dir='gpx_traces'):
               help='City name / examples: [{}].'.format(', '.join(bounding_boxes.keys())))
 @click.option('--output_dir', default='gpx_traces',
             help='Directory for downloaded traces.')
-def collect_traces(nb_traces, city_name, output_dir='gpx_traces'):
+@click.option('--offset', default=0, help='Pagination offset for OSM requests.')
+def collect_traces(nb_traces, city_name, offset, output_dir='gpx_traces'):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     requests_list = _format_request(
-            bounding_boxes[city_name.lower()], nb_traces)
+            bounding_boxes[city_name.lower()], offset, nb_traces)
     for request_to_send in tqdm(requests_list):
         r = requests.get(request_to_send)
         output_file_name = 'trace_{}_{}.gpx'.format(
