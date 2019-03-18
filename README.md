@@ -1,6 +1,6 @@
 # osm2gpx.py: public GPS traces collection from OSM
 
-_Script to collect public GPS data from the [OSM API (0.6)](h0ttps://wiki.openstreetmap.org/wiki/API_v0.6#GPS_traces) around a given area._
+_Script to collect public GPS data from the [OSM API (0.6)](https://wiki.openstreetmap.org/wiki/API_v0.6#GPS_traces) around a given area._
 
 ## Requirements
 
